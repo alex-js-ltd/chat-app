@@ -6,19 +6,47 @@ import React, {
     ReactNode,
 } from 'react'
 
-type User = any | null
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
+
+type User = FirebaseAuthTypes.User | null
 type AuthProviderProps = { children: ReactNode }
 
-const AuthContext = createContext<{ user: User } | undefined>(undefined)
-
+const AuthContext = createContext<
+    | { user: User; register: Function; login: Function; logout: Function }
+    | undefined
+>(undefined)
 AuthContext.displayName = 'AuthContext'
+
+const register = async (email: string, password: string) => {
+    if (!email || !password) return
+
+    return await auth().createUserWithEmailAndPassword(email, password)
+}
+
+const login = async (email: string, password: string) => {
+    if (!email || !password) return
+
+    return await auth().signInWithEmailAndPassword(email, password)
+}
+
+const logout = async () => {
+    return await auth().signOut()
+}
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User>(null)
 
-    useEffect(() => {}, [])
+    useEffect(() => {
+        // Auth listener
+        const unsubscribe = auth().onAuthStateChanged((user) => {
+            user ? setUser(user) : setUser(null)
+        })
+        return () => {
+            unsubscribe()
+        }
+    }, [])
 
-    const value = { user }
+    const value = { user, register, login, logout }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
