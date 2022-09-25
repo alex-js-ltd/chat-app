@@ -6,9 +6,9 @@ import { Button, ErrorMessage } from './comps/lib'
 
 const PhoneNumberSignIn: FC = () => {
     const { signInWithPhoneNumber, confirm } = useAuth()
-    const { run, isError, error } = useAsync()
+    const { run, isError, error, isLoading } = useAsync()
 
-    if (confirm) {
+    if (confirm || isLoading) {
         return null
     }
 
