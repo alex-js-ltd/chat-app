@@ -12,22 +12,16 @@ type User = FirebaseAuthTypes.User | null
 type AuthProviderProps = { children: ReactNode }
 
 const AuthContext = createContext<
-    | { user: User; register: Function; login: Function; logout: Function }
+    | {
+          user: User
+          logout: Function
+          signInWithPhoneNumber: Function
+          confirm: FirebaseAuthTypes.ConfirmationResult | null
+          confirmCode: Function
+      }
     | undefined
 >(undefined)
 AuthContext.displayName = 'AuthContext'
-
-const register = async (email: string, password: string) => {
-    if (!email || !password) return
-
-    return await auth().createUserWithEmailAndPassword(email, password)
-}
-
-const login = async (email: string, password: string) => {
-    if (!email || !password) return
-
-    return await auth().signInWithEmailAndPassword(email, password)
-}
 
 const logout = async () => {
     return await auth().signOut()
@@ -46,7 +40,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         }
     }, [])
 
-    const value = { user, register, login, logout }
+    // If null, no SMS has been sent
+    const [confirm, setConfirm] =
+        useState<FirebaseAuthTypes.ConfirmationResult | null>(null)
+
+    // Handle the button press
+    const signInWithPhoneNumber = async (phoneNumber: any) => {
+        const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
+        setConfirm(confirmation)
+    }
+
+    const confirmCode = async (code: any) => {
+        try {
+            await confirm?.confirm(code)
+            console.log('User signed in')
+        } catch (error) {
+            console.log('Invalid code.')
+        }
+    }
+
+    const value = { user, logout, signInWithPhoneNumber, confirm, confirmCode }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
