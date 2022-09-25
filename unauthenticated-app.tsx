@@ -1,8 +1,8 @@
 import React, { useState, FC, useEffect } from 'react'
-import { Button, TextInput, StyleSheet, Text } from 'react-native'
+import { TextInput, StyleSheet, View } from 'react-native'
 import { useAuth } from './context/auth-context'
 import { useAsync } from './utils/useAsync'
-import { ErrorMessage } from './comps/lib'
+import { Button, ErrorMessage } from './comps/lib'
 
 const PhoneNumberSignIn: FC = () => {
     const { signInWithPhoneNumber, confirm } = useAuth()
@@ -16,7 +16,7 @@ const PhoneNumberSignIn: FC = () => {
         <>
             <Button
                 title="Phone Number Sign In"
-                onPress={() => run(signInWithPhoneNumber('+44 7920-425-134'))}
+                onPress={() => run(signInWithPhoneNumber('+1 650-555-3434'))}
             />
 
             {isError ? <ErrorMessage error={error} /> : null}
@@ -56,10 +56,10 @@ const Confirmation: FC = () => {
 }
 
 const UnAuthenticatedApp = () => (
-    <>
+    <View style={styles.container}>
         <PhoneNumberSignIn />
         <Confirmation />
-    </>
+    </View>
 )
 
 const styles = StyleSheet.create({
@@ -68,6 +68,14 @@ const styles = StyleSheet.create({
         margin: 12,
         borderWidth: 1,
         padding: 10,
+        color: '#00d4ff',
+    },
+
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#0a2540',
     },
 })
 

@@ -9,7 +9,7 @@ const App: FC = () => {
     const { user, logout } = useAuth()
 
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1, flexDirection: 'column' }}>
             {user ? <AuthenticatedApp /> : <UnAuthenticatedApp />}
         </SafeAreaView>
     )
