@@ -56,7 +56,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const logout = async () => {
         return await auth()
             .signOut()
-            .then(() => reset)
+            .then(() => reset())
     }
 
     const value = {
