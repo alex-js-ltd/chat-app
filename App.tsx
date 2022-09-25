@@ -1,12 +1,12 @@
 import { SafeAreaView } from 'react-native'
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { useAuth } from './context/auth-context'
 
 import AuthenticatedApp from './authenticated-app'
 import UnAuthenticatedApp from './unauthenticated-app'
 
 const App: FC = () => {
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
 
     return (
         <SafeAreaView>
