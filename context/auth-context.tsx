@@ -18,6 +18,7 @@ const AuthContext = createContext<
           signInWithPhoneNumber: Function
           confirm: FirebaseAuthTypes.ConfirmationResult | null
           confirmCode: Function
+          reset: Function
       }
     | undefined
 >(undefined)
@@ -44,22 +45,26 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     const [confirm, setConfirm] =
         useState<FirebaseAuthTypes.ConfirmationResult | null>(null)
 
-    // Handle the button press
     const signInWithPhoneNumber = async (phoneNumber: any) => {
-        const confirmation = await auth().signInWithPhoneNumber(phoneNumber)
-        setConfirm(confirmation)
+        return auth()
+            .signInWithPhoneNumber(phoneNumber)
+            .then((c) => setConfirm(c))
     }
 
     const confirmCode = async (code: any) => {
-        try {
-            await confirm?.confirm(code)
-            console.log('User signed in')
-        } catch (error) {
-            console.log('Invalid code.')
-        }
+        return await confirm?.confirm(code)
     }
 
-    const value = { user, logout, signInWithPhoneNumber, confirm, confirmCode }
+    const reset = () => setConfirm(null)
+
+    const value = {
+        user,
+        logout,
+        signInWithPhoneNumber,
+        confirm,
+        confirmCode,
+        reset,
+    }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
