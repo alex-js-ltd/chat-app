@@ -24,10 +24,6 @@ const AuthContext = createContext<
 >(undefined)
 AuthContext.displayName = 'AuthContext'
 
-const logout = async () => {
-    return await auth().signOut()
-}
-
 const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User>(null)
 
@@ -56,6 +52,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
 
     const reset = () => setConfirm(null)
+
+    const logout = async () => {
+        return await auth()
+            .signOut()
+            .then(() => reset)
+    }
 
     const value = {
         user,

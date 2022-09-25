@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import { Button, TextInput, StyleSheet, Text } from 'react-native'
 import { useAuth } from './context/auth-context'
 import { useAsync } from './utils/useAsync'
@@ -16,7 +16,7 @@ const PhoneNumberSignIn: FC = () => {
         <>
             <Button
                 title="Phone Number Sign In"
-                onPress={() => run(signInWithPhoneNumber('+49 1512-367-6818'))}
+                onPress={() => run(signInWithPhoneNumber('+44 7920-425-134'))}
             />
 
             {isError ? <ErrorMessage error={error} /> : null}
