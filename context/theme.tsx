@@ -38,11 +38,23 @@ export const theme = createTheme({
         defaults: {},
         signIn: {
             color: 'buttonColor',
-            paddingHorizontal: 'm',
             paddingVertical: 's',
+            paddingHorizontal: 'm',
             backgroundColor: 'buttonBackground',
             borderRadius: 4,
         },
+    },
+
+    inputVariants: {
+        defaults: {
+            color: 'inputTextColor',
+            paddingVertical: 's',
+            paddingHorizontal: 's',
+            backgroundColor: 'inputBackground',
+            borderRadius: 4,
+            marginBottom: 's',
+        },
+        signIn: {},
     },
     textVariants: {
         body: {

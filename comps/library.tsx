@@ -8,7 +8,7 @@ import {
 } from '@shopify/restyle'
 import { Theme } from '../context/theme'
 
-import { Pressable, SafeAreaView } from 'react-native'
+import { Pressable, SafeAreaView, TextInput } from 'react-native'
 
 const Text = createText<Theme>()
 const Box = createBox<Theme>()
@@ -43,4 +43,11 @@ const SafeArea = createRestyleComponent<
     Theme
 >([safeAreaVariant], SafeAreaView)
 
-export { ErrorMessage, Button, Container, SafeArea }
+const inputVariant = createVariant({ themeKey: 'inputVariants' })
+const Input = createRestyleComponent<
+    VariantProps<Theme, 'safeAreaVariants'> &
+        React.ComponentProps<typeof TextInput>,
+    Theme
+>([inputVariant], TextInput)
+
+export { ErrorMessage, Button, Container, SafeArea, Input }

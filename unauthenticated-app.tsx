@@ -2,7 +2,7 @@ import React, { useState, FC, useEffect } from 'react'
 import { TextInput, StyleSheet, View } from 'react-native'
 import { useAuth } from './context/auth-context'
 import { useAsync } from './utils/useAsync'
-import { ErrorMessage, Button, Container } from './comps/library'
+import { ErrorMessage, Button, Container, Input } from './comps/library'
 
 const PhoneNumberSignIn: FC = () => {
     const { signInWithPhoneNumber, confirm } = useAuth()
@@ -36,11 +36,7 @@ const Confirmation: FC = () => {
 
     return (
         <>
-            <TextInput
-                style={styles.input}
-                value={code}
-                onChangeText={(text) => setCode(text)}
-            />
+            <Input value={code} onChangeText={(text) => setCode(text)} />
             <Button
                 title="Confirm Code"
                 onPress={() => run(confirmCode(code))}
