@@ -1,17 +1,15 @@
-import React, { useState, FC } from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import { useAuth } from './context/auth-context'
-import { useAsync } from './utils/useAsync'
+
 import { ErrorMessage, Button, Container, Input } from './comps/library'
 
-const PhoneNumberSignIn: FC = () => {
+const PhoneNumberSignIn: FC<{
+    run: Function
+    signInWithPhoneNumber: Function
+    error: Error
+    isError: boolean
+}> = ({ run, signInWithPhoneNumber, error, isError }) => {
     const [phoneNum, setPhoneNum] = useState<string>('')
-
-    const { signInWithPhoneNumber, confirm } = useAuth()
-    const { run, isError, error, isLoading } = useAsync()
-
-    if (confirm || isLoading) {
-        return null
-    }
 
     return (
         <>
@@ -32,23 +30,23 @@ const PhoneNumberSignIn: FC = () => {
     )
 }
 
-const Confirmation: FC = () => {
+const Confirmation: FC<{
+    data: any
+    run: Function
+    error: Error
+    isError: boolean
+    reset: Function
+}> = ({ run, data, error, isError, reset }) => {
     const [code, setCode] = useState('')
-
-    const { confirm, confirmCode, reset } = useAuth()
-    const { run, isError, error } = useAsync()
-
-    if (!confirm) {
-        return null
-    }
 
     return (
         <>
             <Input value={code} onChangeText={(text) => setCode(text)} />
             <Button
                 title="Confirm Code"
-                onPress={() => run(confirmCode(code))}
+                onPress={() => run(data?.confirm(code))}
             />
+
             {isError ? (
                 <>
                     <ErrorMessage error={error} />
@@ -59,11 +57,34 @@ const Confirmation: FC = () => {
     )
 }
 
-const UnAuthenticatedApp = () => (
-    <Container>
-        <PhoneNumberSignIn />
-        <Confirmation />
-    </Container>
-)
+const UnAuthenticatedApp = () => {
+    const { data, signInWithPhoneNumber, run, error, isError, reset } =
+        useAuth()
+
+    useEffect(() => {
+        console.log('data', data?.confirm)
+    }, [data])
+
+    return (
+        <Container>
+            {data?.confirm ? (
+                <Confirmation
+                    run={run}
+                    data={data}
+                    error={error}
+                    isError={isError}
+                    reset={reset}
+                />
+            ) : (
+                <PhoneNumberSignIn
+                    run={run}
+                    signInWithPhoneNumber={signInWithPhoneNumber}
+                    error={error}
+                    isError={isError}
+                />
+            )}
+        </Container>
+    )
+}
 
 export default UnAuthenticatedApp

@@ -8,17 +8,23 @@ import React, {
 
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
+import { useAsync } from '../utils/useAsync'
+
 type User = FirebaseAuthTypes.User | null
 type AuthProviderProps = { children: ReactNode }
 
 const AuthContext = createContext<
     | {
           user: User
-          logout: Function
-          signInWithPhoneNumber: Function
-          confirm: FirebaseAuthTypes.ConfirmationResult | null
-          confirmCode: Function
+          data: FirebaseAuthTypes.ConfirmationResult | null
+          run: Function
+          error: Error
+          isError: boolean
           reset: Function
+
+          signInWithPhoneNumber: Function
+
+          logout: Function
       }
     | undefined
 >(undefined)
@@ -37,21 +43,22 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         }
     }, [])
 
-    // If null, no SMS has been sent
-    const [confirm, setConfirm] =
-        useState<FirebaseAuthTypes.ConfirmationResult | null>(null)
+    const {
+        data,
+        status,
+        error,
+        isLoading,
+        isIdle,
+        isError,
+        isSuccess,
+        run,
+        setData,
+        reset,
+    } = useAsync()
 
     const signInWithPhoneNumber = async (phoneNumber: any) => {
-        return auth()
-            .signInWithPhoneNumber(phoneNumber)
-            .then((c) => setConfirm(c))
+        return auth().signInWithPhoneNumber(phoneNumber)
     }
-
-    const confirmCode = async (code: any) => {
-        return await confirm?.confirm(code)
-    }
-
-    const reset = () => setConfirm(null)
 
     const logout = async () => {
         return await auth()
@@ -61,11 +68,18 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
     const value = {
         user,
-        logout,
-        signInWithPhoneNumber,
-        confirm,
-        confirmCode,
+
+        data,
+        run,
+        error,
+        isError,
         reset,
+
+        // sign in
+        signInWithPhoneNumber,
+
+        // logout
+        logout,
     }
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
