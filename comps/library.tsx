@@ -8,7 +8,7 @@ import {
 } from '@shopify/restyle'
 import { Theme } from '../context/theme'
 
-import { Pressable } from 'react-native'
+import { Pressable, SafeAreaView } from 'react-native'
 
 const Text = createText<Theme>()
 const Box = createBox<Theme>()
@@ -19,16 +19,28 @@ const ErrorMessage: FC<{ error: Error }> = ({ error }) => (
 
 const buttonVariant = createVariant({ themeKey: 'buttonVariants' })
 const ButtonContainer = createRestyleComponent<
-    VariantProps<Theme, 'buttonVariants'> & React.ComponentProps<typeof Box>,
+    VariantProps<Theme, 'buttonVariants'> &
+        React.ComponentProps<typeof Pressable>,
     Theme
->([buttonVariant], Box)
+>([buttonVariant], Pressable)
 
 const Button: FC<{ onPress: any; title: string }> = ({ onPress, title }) => (
-    <Pressable onPress={onPress}>
-        <ButtonContainer variant="signIn">
-            <Text variant="button">{title}</Text>
-        </ButtonContainer>
-    </Pressable>
+    <ButtonContainer variant="signIn" onPress={onPress}>
+        <Text variant="button">{title}</Text>
+    </ButtonContainer>
 )
 
-export { ErrorMessage, Button }
+const containerVariant = createVariant({ themeKey: 'containerVariants' })
+const Container = createRestyleComponent<
+    VariantProps<Theme, 'containerVariants'> & React.ComponentProps<typeof Box>,
+    Theme
+>([containerVariant], Box)
+
+const safeAreaVariant = createVariant({ themeKey: 'safeAreaVariants' })
+const SafeArea = createRestyleComponent<
+    VariantProps<Theme, 'safeAreaVariants'> &
+        React.ComponentProps<typeof SafeAreaView>,
+    Theme
+>([safeAreaVariant], SafeAreaView)
+
+export { ErrorMessage, Button, Container, SafeArea }

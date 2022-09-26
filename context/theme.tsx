@@ -50,10 +50,26 @@ export const theme = createTheme({
         },
         button: {
             color: 'buttonColor',
+            textAlign: 'center',
         },
         error: {
             color: 'inputErrorAccentColor',
         },
+    },
+    containerVariants: {
+        defaults: {
+            margin: 'l',
+            flex: 1,
+            justifyContent: 'center',
+        },
+        signIn: {},
+    },
+    safeAreaVariants: {
+        defaults: {
+            flex: 1,
+            backgroundColor: 'backgroundColor',
+        },
+        signIn: {},
     },
 })
 
