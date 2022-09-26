@@ -66,6 +66,8 @@ export const theme = createTheme({
         },
         error: {
             color: 'inputErrorAccentColor',
+            marginTop: 'm',
+            marginBottom: 'm',
         },
     },
     containerVariants: {
