@@ -1,5 +1,4 @@
-import React, { useState, FC, useEffect } from 'react'
-import { TextInput, StyleSheet, View } from 'react-native'
+import React, { useState, FC } from 'react'
 import { useAuth } from './context/auth-context'
 import { useAsync } from './utils/useAsync'
 import { ErrorMessage, Button, Container, Input } from './comps/library'
@@ -66,15 +65,5 @@ const UnAuthenticatedApp = () => (
         <Confirmation />
     </Container>
 )
-
-const styles = StyleSheet.create({
-    input: {
-        height: 40,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        color: '#00d4ff',
-    },
-})
 
 export default UnAuthenticatedApp
