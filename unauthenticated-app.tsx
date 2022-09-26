@@ -5,6 +5,8 @@ import { useAsync } from './utils/useAsync'
 import { ErrorMessage, Button, Container, Input } from './comps/library'
 
 const PhoneNumberSignIn: FC = () => {
+    const [phoneNum, setPhoneNum] = useState<string>('')
+
     const { signInWithPhoneNumber, confirm } = useAuth()
     const { run, isError, error, isLoading } = useAsync()
 
@@ -14,6 +16,13 @@ const PhoneNumberSignIn: FC = () => {
 
     return (
         <>
+            <Input
+                value={phoneNum}
+                onChangeText={(text) => setPhoneNum(text)}
+                placeholder="+1 650-555-3434"
+                keyboardType="numeric"
+                placeholderTextColor="#b6c2cd"
+            />
             <Button
                 title="Phone Number Sign In"
                 onPress={() => run(signInWithPhoneNumber('+1 650-555-3434'))}

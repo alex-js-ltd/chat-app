@@ -50,7 +50,7 @@ export const theme = createTheme({
             color: 'inputTextColor',
             paddingVertical: 's',
             paddingHorizontal: 's',
-            backgroundColor: 'inputBackground',
+            backgroundColor: 'inputBackgroundAlt',
             borderRadius: 4,
             marginBottom: 's',
         },
