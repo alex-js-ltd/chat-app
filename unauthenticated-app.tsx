@@ -1,26 +1,39 @@
 import React, { useState, FC, useEffect } from 'react'
 import { useAuth } from './context/auth-context'
 
-import { ErrorMessage, Button, Container, Input } from './comps/library'
+import { ErrorMessage, Button, Container, Input, Box } from './comps/library'
 
 const PhoneNumberSignIn: FC<{
     run: Function
     signInWithPhoneNumber: Function
 }> = ({ run, signInWithPhoneNumber }) => {
+    const [countryCode, setCountryCode] = useState<string>('')
     const [phoneNum, setPhoneNum] = useState<string>('')
 
     return (
         <>
-            <Input
-                value={phoneNum}
-                onChangeText={(text) => setPhoneNum(text)}
-                placeholder="+1 650-555-3434"
-                keyboardType="numeric"
-                placeholderTextColor="#b6c2cd"
-            />
+            <Box flexDirection="row">
+                <Input
+                    value={countryCode}
+                    onChangeText={(text) => setCountryCode(text)}
+                    keyboardType="numeric"
+                    placeholderTextColor="#b6c2cd"
+                    variant="countryCode"
+                    autoComplete="tel-country-code"
+                    placeholder="+49"
+                />
+
+                <Input
+                    value={phoneNum}
+                    onChangeText={(text) => setPhoneNum(text)}
+                    placeholder="650-555-3434"
+                    keyboardType="numeric"
+                    placeholderTextColor="#b6c2cd"
+                />
+            </Box>
             <Button
                 title="Phone Number Sign In"
-                onPress={() => run(signInWithPhoneNumber('+1 650-555-3434'))}
+                onPress={() => run(signInWithPhoneNumber(phoneNum))}
             />
         </>
     )
@@ -51,9 +64,13 @@ const UnAuthenticatedApp = () => {
         if (isError) {
             setTimeout(() => {
                 reset()
-            }, 2000)
+            }, 5000)
         }
     }, [isError])
+
+    useEffect(() => {
+        console.log('data', data?.confirm)
+    }, [data])
 
     return (
         <Container>

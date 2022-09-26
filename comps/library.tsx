@@ -45,9 +45,9 @@ const SafeArea = createRestyleComponent<
 
 const inputVariant = createVariant({ themeKey: 'inputVariants' })
 const Input = createRestyleComponent<
-    VariantProps<Theme, 'safeAreaVariants'> &
+    VariantProps<Theme, 'inputVariants'> &
         React.ComponentProps<typeof TextInput>,
     Theme
 >([inputVariant], TextInput)
 
-export { ErrorMessage, Button, Container, SafeArea, Input }
+export { ErrorMessage, Button, Container, SafeArea, Input, Box, Text }

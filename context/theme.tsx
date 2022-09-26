@@ -47,6 +47,7 @@ export const theme = createTheme({
 
     inputVariants: {
         defaults: {
+            flex: 1,
             color: 'inputTextColor',
             paddingVertical: 's',
             paddingHorizontal: 's',
@@ -54,9 +55,14 @@ export const theme = createTheme({
             borderRadius: 4,
             marginBottom: 's',
         },
-        signIn: {},
+        countryCode: {
+            width: 100,
+            flex: 0.125,
+            marginRight: 's',
+        },
     },
     textVariants: {
+        defaults: {},
         body: {
             color: 'textColor',
         },
