@@ -2,7 +2,7 @@ import React, { useState, FC, useEffect } from 'react'
 import { TextInput, StyleSheet, View } from 'react-native'
 import { useAuth } from './context/auth-context'
 import { useAsync } from './utils/useAsync'
-import { Button, ErrorMessage } from './comps/lib'
+import { ErrorMessage, Button } from './comps/library'
 
 const PhoneNumberSignIn: FC = () => {
     const { signInWithPhoneNumber, confirm } = useAuth()
