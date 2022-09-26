@@ -10,6 +10,14 @@ const PhoneNumberSignIn: FC<{
     const [countryCode, setCountryCode] = useState<string>('')
     const [phoneNum, setPhoneNum] = useState<string>('')
 
+    const handleSubmit = () => {
+        let phoneNumber = countryCode.concat(phoneNum)
+
+        console.log(phoneNumber)
+
+        run(signInWithPhoneNumber(phoneNumber))
+    }
+
     return (
         <>
             <Box flexDirection="row">
@@ -29,11 +37,12 @@ const PhoneNumberSignIn: FC<{
                     placeholder="650-555-3434"
                     keyboardType="numeric"
                     placeholderTextColor="#b6c2cd"
+                    variant="phoneNum"
                 />
             </Box>
             <Button
                 title="Phone Number Sign In"
-                onPress={() => run(signInWithPhoneNumber(phoneNum))}
+                onPress={() => handleSubmit()}
             />
         </>
     )

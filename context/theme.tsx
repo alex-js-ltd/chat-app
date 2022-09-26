@@ -47,7 +47,6 @@ export const theme = createTheme({
 
     inputVariants: {
         defaults: {
-            flex: 1,
             color: 'inputTextColor',
             paddingVertical: 's',
             paddingHorizontal: 's',
@@ -59,6 +58,16 @@ export const theme = createTheme({
             width: 100,
             flex: 0.125,
             marginRight: 's',
+        },
+
+        phoneNum: {
+            flex: 1,
+            color: 'inputTextColor',
+            paddingVertical: 's',
+            paddingHorizontal: 's',
+            backgroundColor: 'inputBackgroundAlt',
+            borderRadius: 4,
+            marginBottom: 's',
         },
     },
     textVariants: {
@@ -88,6 +97,7 @@ export const theme = createTheme({
         defaults: {
             flex: 1,
             backgroundColor: 'backgroundColor',
+            flexDirection: 'row',
         },
         signIn: {},
     },
