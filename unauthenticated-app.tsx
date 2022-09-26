@@ -49,18 +49,15 @@ const PhoneNumberSignIn: FC<{
 }
 
 const Confirmation: FC<{
-    data: any
+    confirm: Function
     run: Function
-}> = ({ run, data }) => {
+}> = ({ run, confirm }) => {
     const [code, setCode] = useState('')
 
     return (
         <>
             <Input value={code} onChangeText={(text) => setCode(text)} />
-            <Button
-                title="Confirm Code"
-                onPress={() => run(data?.confirm(code))}
-            />
+            <Button title="Confirm Code" onPress={() => run(confirm(code))} />
         </>
     )
 }
@@ -77,14 +74,10 @@ const UnAuthenticatedApp = () => {
         }
     }, [isError])
 
-    useEffect(() => {
-        console.log('data', data?.confirm)
-    }, [data])
-
     return (
         <Container>
             {data?.confirm ? (
-                <Confirmation run={run} data={data} />
+                <Confirmation run={run} confirm={data?.confirm} />
             ) : (
                 <PhoneNumberSignIn
                     run={run}
