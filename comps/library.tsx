@@ -8,7 +8,13 @@ import {
 } from '@shopify/restyle'
 import { Theme } from '../context/theme'
 
-import { Pressable, SafeAreaView, TextInput } from 'react-native'
+import {
+    Pressable,
+    SafeAreaView,
+    TextInput,
+    GestureResponderEvent,
+    Modal,
+} from 'react-native'
 
 const Text = createText<Theme>()
 const Box = createBox<Theme>()
@@ -24,8 +30,12 @@ const ButtonContainer = createRestyleComponent<
     Theme
 >([buttonVariant], Pressable)
 
-const Button: FC<{ onPress: any; title: string }> = ({ onPress, title }) => (
-    <ButtonContainer variant="signIn" onPress={onPress}>
+const Button: FC<{
+    onPress?: (event: GestureResponderEvent) => void | null
+    title: string
+    variant: any
+}> = ({ onPress, title, variant }) => (
+    <ButtonContainer variant={variant} onPress={onPress}>
         <Text variant="button">{title}</Text>
     </ButtonContainer>
 )

@@ -43,6 +43,24 @@ export const theme = createTheme({
             backgroundColor: 'buttonBackground',
             borderRadius: 4,
         },
+        modalOpenButton: {
+            color: 'inputTextColor',
+            paddingVertical: 's',
+            paddingHorizontal: 's',
+            backgroundColor: 'inputBackgroundAlt',
+            borderRadius: 4,
+            marginBottom: 's',
+            flex: 0.125,
+            marginRight: 's',
+        },
+
+        modalCloseButton: {
+            color: 'buttonColor',
+            paddingVertical: 's',
+            paddingHorizontal: 'm',
+            backgroundColor: 'buttonBackground',
+            borderRadius: 4,
+        },
     },
 
     inputVariants: {
@@ -55,7 +73,6 @@ export const theme = createTheme({
             marginBottom: 's',
         },
         countryCode: {
-            width: 100,
             flex: 0.125,
             marginRight: 's',
         },
