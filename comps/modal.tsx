@@ -40,7 +40,7 @@ const ModalButton: FC<{ children: ReactElement }> = ({ children: child }) => {
     })
 }
 
-const ModalContentsBase: FC<{ children: any }> = ({ children }) => {
+const ModalContentsBase: FC<{ children: ReactElement }> = ({ children }) => {
     const [isOpen, setIsOpen] = useContext(ModalContext)
 
     if (!setIsOpen) {
@@ -62,6 +62,8 @@ const ModalContentsBase: FC<{ children: any }> = ({ children }) => {
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
+                    borderWidth: 1,
+                    borderColor: 'pink',
                 }}
             >
                 {children}
