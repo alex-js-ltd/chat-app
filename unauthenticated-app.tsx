@@ -21,7 +21,7 @@ const PhoneNumberSignIn: FC<{
             <Box flexDirection="row">
                 <ModalComp>
                     <ModalButton>
-                        <Button title="+49" variant="modalOpenButton" />
+                        <Button title={countryCode} variant="modalOpenButton" />
                     </ModalButton>
 
                     <ModalContentsBase>
