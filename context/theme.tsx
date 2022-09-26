@@ -1,19 +1,30 @@
 import { createTheme, spacing } from '@shopify/restyle'
 
-const baseTheme = {
+const palette = {
+    backgroundColor: '#0a2540',
+    buttonBackground: '#02bcf5',
+    buttonColor: '#0A2540',
+    textColor: '#adbdcc',
+    inputBackground: '#0c2e4e',
+    inputBackgroundAlt: '#274869',
+    inputPlaceHolderColor: '#b6c2cd',
+    inputErrorAccentColor: '#ff5996',
+    inputTextColor: '#fff',
+}
+
+export const theme = createTheme({
     colors: {
-        backgroundColor: '#0a2540',
-        buttonBackground: '#02bcf5',
-        buttonColor: '#0A2540',
-        textColor: '#adbdcc',
-        inputBackground: '#0c2e4e',
-        inputBackgroundAlt: '#274869',
-        inputPlaceHolderColor: '#b6c2cd',
-        inputErrorAccentColor: '#ff5996',
-        inputTextColor: '#fff',
+        backgroundColor: palette.backgroundColor,
+        buttonBackground: palette.buttonBackground,
+        buttonColor: palette.buttonColor,
+        textColor: palette.textColor,
+        inputBackground: palette.inputBackground,
+        inputBackgroundAlt: palette.inputBackgroundAlt,
+        inputPlaceHolderColor: palette.inputPlaceHolderColor,
+        inputErrorAccentColor: palette.inputErrorAccentColor,
+        inputTextColor: palette.inputTextColor,
     },
     spacing: {
-        xs: 4,
         s: 8,
         m: 16,
         l: 24,
@@ -23,10 +34,6 @@ const baseTheme = {
         phone: 0,
         tablet: 768,
     },
-}
-
-export const theme = createTheme({
-    ...baseTheme,
     buttonVariants: {
         defaults: {},
         signIn: {
