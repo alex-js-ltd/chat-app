@@ -1,14 +1,16 @@
-import { createTheme } from '@shopify/restyle'
+import { createTheme, spacing } from '@shopify/restyle'
 
-const BaseTheme = {
+const baseTheme = {
     colors: {
-        text: '#252A31',
-        background: 'white',
-        primary: '#006CFF',
-        black: '#252A31',
-        white: 'white',
-        red: '#FF3E5C',
-        transparent: 'transparent',
+        backgroundColor: '#0a2540',
+        buttonBackground: '#02bcf5',
+        buttonColor: '#0A2540',
+        textColor: '#adbdcc',
+        inputBackground: '#0c2e4e',
+        inputBackgroundAlt: '#274869',
+        inputPlaceHolderColor: '#b6c2cd',
+        inputErrorAccentColor: '#ff5996',
+        inputTextColor: '#fff',
     },
     spacing: {
         xs: 4,
@@ -24,22 +26,26 @@ const BaseTheme = {
 }
 
 export const theme = createTheme({
-    ...BaseTheme,
+    ...baseTheme,
     buttonVariants: {
         defaults: {},
         signIn: {
-            color: 'white',
+            color: 'buttonColor',
+            paddingHorizontal: 'm',
+            paddingVertical: 's',
+            backgroundColor: 'buttonBackground',
+            borderRadius: 4,
         },
     },
     textVariants: {
         body: {
-            color: 'black',
+            color: 'textColor',
         },
         button: {
-            color: 'white',
+            color: 'buttonColor',
         },
         error: {
-            color: 'red',
+            color: 'inputErrorAccentColor',
         },
     },
 })
