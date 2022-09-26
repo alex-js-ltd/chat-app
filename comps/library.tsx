@@ -13,7 +13,6 @@ import {
     SafeAreaView,
     TextInput,
     GestureResponderEvent,
-    Modal,
 } from 'react-native'
 
 const Text = createText<Theme>()

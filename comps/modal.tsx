@@ -18,7 +18,7 @@ const ModalContext = createContext<[isOpen: boolean, setIsOpen: Function] | []>(
     []
 )
 
-const ModalComp: FC<{ children: ReactElement }> = ({ children }) => {
+const ModalComp: FC<{ children: ReactElement[] }> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     return (

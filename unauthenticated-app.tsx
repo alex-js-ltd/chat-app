@@ -20,20 +20,15 @@ const PhoneNumberSignIn: FC<{
         <>
             <Box flexDirection="row">
                 <ModalComp>
-                    <>
-                        <ModalButton>
-                            <Button title="+49" variant="modalOpenButton" />
-                        </ModalButton>
+                    <ModalButton>
+                        <Button title="+49" variant="modalOpenButton" />
+                    </ModalButton>
 
-                        <ModalContentsBase>
-                            <ModalButton>
-                                <Button
-                                    title="close"
-                                    variant="modalCloseButton"
-                                />
-                            </ModalButton>
-                        </ModalContentsBase>
-                    </>
+                    <ModalContentsBase>
+                        <ModalButton>
+                            <Button title="close" variant="modalCloseButton" />
+                        </ModalButton>
+                    </ModalContentsBase>
                 </ModalComp>
                 <Input
                     value={phoneNum}
