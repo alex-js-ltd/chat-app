@@ -1,19 +1,28 @@
-import React, { useState, FC } from 'react'
+import React, { useState, FC, useEffect } from 'react'
 import { useAuth } from './context/auth-context'
 
 import { ErrorMessage, Button, Container, Input, Box } from './comps/library'
 import { ModalProvider, ModalButton, ModalContentsBase } from './comps/modal'
 
-const CountryCode: FC<{ code: string }> = ({ code }) => (
+import { countryCodes } from './utils/countryCodes'
+import { FlatList, Text } from 'react-native'
+import { CountryRow } from './comps/country-row'
+
+const CountryCodes: FC<{ code: string }> = ({ code }) => (
     <ModalProvider>
         <ModalButton>
             <Button title={code} variant="modalOpenButton" />
         </ModalButton>
-
         <ModalContentsBase>
             <ModalButton>
-                <Button title="close" variant="modalOpenButton" />
+                <Button title="close" variant="modalCloseButton" />
             </ModalButton>
+            <FlatList
+                data={countryCodes}
+                renderItem={({ item }) => (
+                    <CountryRow iso={item.iso} code={item.code} />
+                )}
+            />
         </ModalContentsBase>
     </ModalProvider>
 )
@@ -33,7 +42,7 @@ const PhoneNumberSignIn: FC<{
     return (
         <>
             <Box flexDirection="row">
-                <CountryCode code={countryCode} />
+                <CountryCodes code={countryCode} />
                 <Input
                     value={phoneNum}
                     onChangeText={(text) => setPhoneNum(text)}

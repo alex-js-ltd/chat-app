@@ -29,6 +29,7 @@ export const theme = createTheme({
         m: 16,
         l: 24,
         xl: 40,
+        auto: 'auto',
     },
     breakpoints: {
         phone: 0,
@@ -53,6 +54,17 @@ export const theme = createTheme({
             flex: 0.125,
             marginRight: 's',
         },
+        modalCloseButton: {
+            color: 'inputTextColor',
+            paddingVertical: 's',
+            paddingHorizontal: 's',
+            backgroundColor: 'inputBackgroundAlt',
+            borderRadius: 4,
+            marginBottom: 's',
+            marginTop: 's',
+            marginRight: 'auto',
+            marginLeft: 'auto',
+        },
     },
 
     inputVariants: {
@@ -73,7 +85,9 @@ export const theme = createTheme({
         },
     },
     textVariants: {
-        defaults: {},
+        defaults: {
+            color: 'textColor',
+        },
         body: {
             color: 'textColor',
         },
@@ -93,12 +107,16 @@ export const theme = createTheme({
             flex: 1,
             justifyContent: 'center',
         },
-        modal: {
-            justifyContent: 'flex-start',
+
+        countryRow: {
+            flexDirection: 'row',
+            borderBottomWidth: 1,
+            borderColor: 'inputErrorAccentColor',
+            justifyContent: 'space-between',
+            marginHorizontal: 'l',
+            marginBottom: 's',
             alignItems: 'center',
-            borderColor: 'textColor',
-            margin: 0,
-            backgroundColor: 'inputBackground',
+            height: 40,
         },
     },
     safeAreaVariants: {
@@ -107,7 +125,11 @@ export const theme = createTheme({
             backgroundColor: 'backgroundColor',
             flexDirection: 'row',
         },
-        signIn: {},
+        modal: {
+            alignItems: 'stretch',
+            backgroundColor: 'inputBackground',
+            flexDirection: 'column',
+        },
     },
 })
 
