@@ -7,7 +7,7 @@ const AuthenticatedApp: FC = () => {
 
     return (
         <Container>
-            <Button title="log out" onPress={() => logout()} />
+            <Button title="log out" onPress={() => logout()} variant="signIn" />
         </Container>
     )
 }

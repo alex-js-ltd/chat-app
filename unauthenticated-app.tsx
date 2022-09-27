@@ -2,34 +2,27 @@ import React, { useState, FC, useEffect } from 'react'
 import { useAuth } from './context/auth-context'
 
 import { ErrorMessage, Button, Container, Input, Box } from './comps/library'
-import { ModalComp, ModalButton, ModalContentsBase } from './comps/modal'
 
 const PhoneNumberSignIn: FC<{
     run: Function
     signInWithPhoneNumber: Function
 }> = ({ run, signInWithPhoneNumber }) => {
-    const [countryCode, setCountryCode] = useState<string>('+49')
-    const [phoneNum, setPhoneNum] = useState<string>('')
-
-    const handleSubmit = () => {
-        let phoneNumber = countryCode.concat(phoneNum)
-        run(signInWithPhoneNumber(phoneNumber))
-    }
+    const [countryCode, setCountryCode] = useState<string>('')
+    const [phoneNum, setPhoneNum] = useState<string>('+16505553434')
 
     return (
         <>
             <Box flexDirection="row">
-                <ModalComp>
-                    <ModalButton>
-                        <Button title={countryCode} variant="modalOpenButton" />
-                    </ModalButton>
+                <Input
+                    value={countryCode}
+                    onChangeText={(text) => setCountryCode(text)}
+                    keyboardType="numeric"
+                    placeholderTextColor="#b6c2cd"
+                    variant="countryCode"
+                    autoComplete="tel-country-code"
+                    placeholder="+49"
+                />
 
-                    <ModalContentsBase>
-                        <ModalButton>
-                            <Button title="close" variant="modalCloseButton" />
-                        </ModalButton>
-                    </ModalContentsBase>
-                </ModalComp>
                 <Input
                     value={phoneNum}
                     onChangeText={(text) => setPhoneNum(text)}
@@ -41,7 +34,7 @@ const PhoneNumberSignIn: FC<{
             </Box>
             <Button
                 title="Phone Number Sign In"
-                onPress={() => handleSubmit()}
+                onPress={() => run(signInWithPhoneNumber(phoneNum))}
                 variant="signIn"
             />
         </>
@@ -49,9 +42,9 @@ const PhoneNumberSignIn: FC<{
 }
 
 const Confirmation: FC<{
-    confirm: Function
+    data: any
     run: Function
-}> = ({ run, confirm }) => {
+}> = ({ run, data }) => {
     const [code, setCode] = useState('')
 
     return (
@@ -59,7 +52,7 @@ const Confirmation: FC<{
             <Input value={code} onChangeText={(text) => setCode(text)} />
             <Button
                 title="Confirm Code"
-                onPress={() => run(confirm(code))}
+                onPress={() => run(data?.confirm(code))}
                 variant="signIn"
             />
         </>
@@ -78,10 +71,14 @@ const UnAuthenticatedApp = () => {
         }
     }, [isError])
 
+    useEffect(() => {
+        console.log('data', data?.confirm)
+    }, [data])
+
     return (
         <Container>
             {data?.confirm ? (
-                <Confirmation run={run} confirm={data?.confirm} />
+                <Confirmation run={run} data={data} />
             ) : (
                 <PhoneNumberSignIn
                     run={run}
