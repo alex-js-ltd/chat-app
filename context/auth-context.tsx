@@ -56,7 +56,9 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         reset,
     } = useAsync()
 
-    const signInWithPhoneNumber = async (phoneNumber: any) => {
+    const signInWithPhoneNumber = async (
+        phoneNumber: any
+    ): Promise<FirebaseAuthTypes.ConfirmationResult> => {
         return auth().signInWithPhoneNumber(phoneNumber)
     }
 

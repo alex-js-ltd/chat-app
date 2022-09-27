@@ -63,18 +63,6 @@ const UnAuthenticatedApp = () => {
     const { data, signInWithPhoneNumber, run, error, isError, reset } =
         useAuth()
 
-    useEffect(() => {
-        if (isError) {
-            setTimeout(() => {
-                reset()
-            }, 5000)
-        }
-    }, [isError])
-
-    useEffect(() => {
-        console.log('data', data?.confirm)
-    }, [data])
-
     return (
         <Container>
             {data?.confirm ? (
