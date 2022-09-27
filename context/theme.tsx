@@ -93,7 +93,13 @@ export const theme = createTheme({
             flex: 1,
             justifyContent: 'center',
         },
-        signIn: {},
+        modal: {
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            borderColor: 'textColor',
+            margin: 0,
+            backgroundColor: 'inputBackground',
+        },
     },
     safeAreaVariants: {
         defaults: {

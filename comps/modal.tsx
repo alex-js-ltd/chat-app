@@ -8,7 +8,8 @@ import {
     useEffect,
 } from 'react'
 
-import { Alert, Modal, View } from 'react-native'
+import { Alert, Modal } from 'react-native'
+import { Container } from './library'
 
 const callAll =
     (...fns: any) =>
@@ -66,17 +67,7 @@ const ModalContentsBase: FC<{ children: ReactElement }> = ({ children }) => {
                 setIsOpen(!isOpen)
             }}
         >
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    borderWidth: 1,
-                    borderColor: 'pink',
-                }}
-            >
-                {children}
-            </View>
+            <Container variant="modal">{children}</Container>
         </Modal>
     )
 }
