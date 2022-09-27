@@ -5,6 +5,7 @@ import {
     useContext,
     useState,
     ReactElement,
+    useEffect,
 } from 'react'
 
 import { Alert, Modal, View } from 'react-native'
@@ -14,26 +15,34 @@ const callAll =
     (...args: any) =>
         fns.forEach((fn: any) => fn && fn(...args))
 
-const ModalContext = createContext<[isOpen: boolean, setIsOpen: Function] | []>(
-    []
-)
+const ModalContext = createContext<
+    { isOpen: boolean; setIsOpen: Function } | undefined
+>(undefined)
 
-const ModalComp: FC<{ children: ReactElement[] }> = ({ children }) => {
+const ModalProvider: FC<{ children: ReactElement[] }> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false)
 
+    const value = { isOpen, setIsOpen }
+
     return (
-        <ModalContext.Provider value={[isOpen, setIsOpen]}>
-            {children}
-        </ModalContext.Provider>
+        <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
     )
 }
 
-const ModalButton: FC<{ children: ReactElement }> = ({ children: child }) => {
-    const [isOpen, setIsOpen] = useContext(ModalContext)
-
-    if (!setIsOpen) {
-        return null
+const useModal = () => {
+    const context = useContext(ModalContext)
+    if (context === undefined) {
+        throw new Error(`useModal must be used within a AuthContext provider`)
     }
+    return context
+}
+
+const ModalButton: FC<{ children: ReactElement }> = ({ children: child }) => {
+    const { isOpen, setIsOpen } = useModal()
+
+    useEffect(() => {
+        console.log('child', child.props)
+    }, [child])
 
     return cloneElement(child, {
         onPress: callAll(() => setIsOpen(!isOpen), child.props.onPress),
@@ -41,11 +50,11 @@ const ModalButton: FC<{ children: ReactElement }> = ({ children: child }) => {
 }
 
 const ModalContentsBase: FC<{ children: ReactElement }> = ({ children }) => {
-    const [isOpen, setIsOpen] = useContext(ModalContext)
+    const { isOpen, setIsOpen } = useModal()
 
-    if (!setIsOpen) {
-        return null
-    }
+    useEffect(() => {
+        console.log('isOpen', isOpen)
+    }, [isOpen])
 
     return (
         <Modal
@@ -72,4 +81,4 @@ const ModalContentsBase: FC<{ children: ReactElement }> = ({ children }) => {
     )
 }
 
-export { ModalComp, ModalButton, ModalContentsBase }
+export { ModalProvider, ModalButton, ModalContentsBase }

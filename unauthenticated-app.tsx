@@ -1,28 +1,39 @@
-import React, { useState, FC, useEffect } from 'react'
+import React, { useState, FC } from 'react'
 import { useAuth } from './context/auth-context'
 
 import { ErrorMessage, Button, Container, Input, Box } from './comps/library'
+import { ModalProvider, ModalButton, ModalContentsBase } from './comps/modal'
+
+const CountryCode: FC<{ code: string }> = ({ code }) => (
+    <ModalProvider>
+        <ModalButton>
+            <Button title={code} variant="modalOpenButton" />
+        </ModalButton>
+
+        <ModalContentsBase>
+            <ModalButton>
+                <Button title="close" variant="modalOpenButton" />
+            </ModalButton>
+        </ModalContentsBase>
+    </ModalProvider>
+)
 
 const PhoneNumberSignIn: FC<{
     run: Function
     signInWithPhoneNumber: Function
 }> = ({ run, signInWithPhoneNumber }) => {
-    const [countryCode, setCountryCode] = useState<string>('')
-    const [phoneNum, setPhoneNum] = useState<string>('+16505553434')
+    const [countryCode, setCountryCode] = useState<string>('+1')
+    const [phoneNum, setPhoneNum] = useState<string>('6505553434')
+
+    const handleSubmit = () => {
+        const fullPhoneNum = countryCode.concat(phoneNum)
+        run(signInWithPhoneNumber(fullPhoneNum))
+    }
 
     return (
         <>
             <Box flexDirection="row">
-                <Input
-                    value={countryCode}
-                    onChangeText={(text) => setCountryCode(text)}
-                    keyboardType="numeric"
-                    placeholderTextColor="#b6c2cd"
-                    variant="countryCode"
-                    autoComplete="tel-country-code"
-                    placeholder="+49"
-                />
-
+                <CountryCode code={countryCode} />
                 <Input
                     value={phoneNum}
                     onChangeText={(text) => setPhoneNum(text)}
@@ -34,7 +45,7 @@ const PhoneNumberSignIn: FC<{
             </Box>
             <Button
                 title="Phone Number Sign In"
-                onPress={() => run(signInWithPhoneNumber(phoneNum))}
+                onPress={() => handleSubmit()}
                 variant="signIn"
             />
         </>
