@@ -53,14 +53,6 @@ export const theme = createTheme({
             flex: 0.125,
             marginRight: 's',
         },
-
-        modalCloseButton: {
-            color: 'buttonColor',
-            paddingVertical: 's',
-            paddingHorizontal: 'm',
-            backgroundColor: 'buttonBackground',
-            borderRadius: 4,
-        },
     },
 
     inputVariants: {
@@ -76,15 +68,8 @@ export const theme = createTheme({
             flex: 0.125,
             marginRight: 's',
         },
-
         phoneNum: {
             flex: 1,
-            color: 'inputTextColor',
-            paddingVertical: 's',
-            paddingHorizontal: 's',
-            backgroundColor: 'inputBackgroundAlt',
-            borderRadius: 4,
-            marginBottom: 's',
         },
     },
     textVariants: {
