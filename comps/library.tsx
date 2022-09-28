@@ -59,4 +59,13 @@ const Input = createRestyleComponent<
     Theme
 >([inputVariant], TextInput)
 
-export { ErrorMessage, Button, Container, SafeArea, Input, Box, Text }
+export {
+    ErrorMessage,
+    Button,
+    Container,
+    SafeArea,
+    Input,
+    Box,
+    Text,
+    ButtonContainer,
+}

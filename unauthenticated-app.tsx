@@ -5,10 +5,13 @@ import { ErrorMessage, Button, Container, Input, Box } from './comps/library'
 import { ModalProvider, ModalButton, ModalContentsBase } from './comps/modal'
 
 import { countryCodes } from './utils/countryCodes'
-import { FlatList, Text } from 'react-native'
+import { FlatList } from 'react-native'
 import { CountryRow } from './comps/country-row'
 
-const CountryCodes: FC<{ code: string }> = ({ code }) => (
+const CountryCodes: FC<{ code: string; setCountryCode: Function }> = ({
+    code,
+    setCountryCode,
+}) => (
     <ModalProvider>
         <ModalButton>
             <Button title={code} variant="modalOpenButton" />
@@ -20,7 +23,11 @@ const CountryCodes: FC<{ code: string }> = ({ code }) => (
             <FlatList
                 data={countryCodes}
                 renderItem={({ item }) => (
-                    <CountryRow iso={item.iso} code={item.code} />
+                    <CountryRow
+                        iso={item.iso}
+                        code={item.code}
+                        setCountryCode={setCountryCode}
+                    />
                 )}
             />
         </ModalContentsBase>
@@ -42,7 +49,10 @@ const PhoneNumberSignIn: FC<{
     return (
         <>
             <Box flexDirection="row">
-                <CountryCodes code={countryCode} />
+                <CountryCodes
+                    code={countryCode}
+                    setCountryCode={setCountryCode}
+                />
                 <Input
                     value={phoneNum}
                     onChangeText={(text) => setPhoneNum(text)}

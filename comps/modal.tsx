@@ -5,11 +5,11 @@ import {
     useContext,
     useState,
     ReactElement,
-    useEffect,
+    ReactNode,
 } from 'react'
 
 import { Alert, Modal } from 'react-native'
-import { Container, SafeArea } from './library'
+import { SafeArea } from './library'
 
 const callAll =
     (...fns: any) =>
@@ -20,9 +20,7 @@ const ModalContext = createContext<
     { isOpen: boolean; setIsOpen: Function } | undefined
 >(undefined)
 
-const ModalProvider: FC<{ children: ReactElement[] | any }> = ({
-    children,
-}) => {
+const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const value = { isOpen, setIsOpen }
@@ -43,21 +41,13 @@ const useModal = () => {
 const ModalButton: FC<{ children: ReactElement }> = ({ children: child }) => {
     const { isOpen, setIsOpen } = useModal()
 
-    useEffect(() => {
-        console.log('child', child.props)
-    }, [child])
-
     return cloneElement(child, {
         onPress: callAll(() => setIsOpen(!isOpen), child.props.onPress),
     })
 }
 
-const ModalContentsBase: FC<{ children: ReactElement[] }> = ({ children }) => {
+const ModalContentsBase: FC<{ children: ReactNode }> = ({ children }) => {
     const { isOpen, setIsOpen } = useModal()
-
-    useEffect(() => {
-        console.log('isOpen', isOpen)
-    }, [isOpen])
 
     return (
         <Modal

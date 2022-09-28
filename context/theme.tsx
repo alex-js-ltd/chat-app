@@ -51,7 +51,7 @@ export const theme = createTheme({
             backgroundColor: 'inputBackgroundAlt',
             borderRadius: 4,
             marginBottom: 's',
-            flex: 0.125,
+            width: 64,
             marginRight: 's',
         },
         modalCloseButton: {
@@ -65,6 +65,17 @@ export const theme = createTheme({
             marginRight: 'auto',
             marginLeft: 'auto',
         },
+
+        countryRow: {
+            flexDirection: 'row',
+            borderBottomWidth: 1,
+            borderColor: 'inputErrorAccentColor',
+            justifyContent: 'space-between',
+            marginHorizontal: 'l',
+            marginBottom: 's',
+            alignItems: 'center',
+            height: 40,
+        },
     },
 
     inputVariants: {
@@ -77,7 +88,7 @@ export const theme = createTheme({
             marginBottom: 's',
         },
         countryCode: {
-            flex: 0.125,
+            width: 400,
             marginRight: 's',
         },
         phoneNum: {
@@ -108,16 +119,7 @@ export const theme = createTheme({
             justifyContent: 'center',
         },
 
-        countryRow: {
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: 'inputErrorAccentColor',
-            justifyContent: 'space-between',
-            marginHorizontal: 'l',
-            marginBottom: 's',
-            alignItems: 'center',
-            height: 40,
-        },
+        countryRow: {},
     },
     safeAreaVariants: {
         defaults: {
