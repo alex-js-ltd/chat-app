@@ -36,28 +36,31 @@ export const theme = createTheme({
         tablet: 768,
     },
     buttonVariants: {
-        defaults: {},
+        defaults: {
+            height: 44,
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
         signIn: {
             color: 'buttonColor',
-            paddingVertical: 's',
             paddingHorizontal: 'm',
             backgroundColor: 'buttonBackground',
             borderRadius: 4,
+            fontSize: 16,
         },
         modalOpenButton: {
             color: 'inputTextColor',
-            paddingVertical: 's',
-            paddingHorizontal: 's',
+
+            paddingHorizontal: 'm',
             backgroundColor: 'inputBackgroundAlt',
             borderRadius: 4,
             marginBottom: 's',
-            width: 64,
             marginRight: 's',
         },
         modalCloseButton: {
             color: 'inputTextColor',
-            paddingVertical: 's',
-            paddingHorizontal: 's',
+            paddingHorizontal: 'm',
             backgroundColor: 'inputBackgroundAlt',
             borderRadius: 4,
             marginBottom: 's',
@@ -74,7 +77,7 @@ export const theme = createTheme({
             marginHorizontal: 'l',
             marginBottom: 's',
             alignItems: 'center',
-            height: 40,
+            height: 44,
         },
     },
 
@@ -82,10 +85,11 @@ export const theme = createTheme({
         defaults: {
             color: 'inputTextColor',
             paddingVertical: 's',
-            paddingHorizontal: 's',
+            paddingHorizontal: 'm',
             backgroundColor: 'inputBackgroundAlt',
             borderRadius: 4,
             marginBottom: 's',
+            height: 44,
         },
         countryCode: {
             width: 400,
