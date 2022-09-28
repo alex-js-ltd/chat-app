@@ -72,12 +72,11 @@ export const theme = createTheme({
         countryRow: {
             flexDirection: 'row',
             borderBottomWidth: 1,
-            borderColor: 'inputErrorAccentColor',
+            borderColor: 'inputBackgroundAlt',
             justifyContent: 'space-between',
             marginHorizontal: 'l',
-            marginBottom: 's',
             alignItems: 'center',
-            height: 44,
+            height: 88,
         },
     },
 

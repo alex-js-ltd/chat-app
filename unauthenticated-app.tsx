@@ -24,7 +24,7 @@ const CountryCodes: FC<{ code: string; setCountryCode: Function }> = ({
                 data={countryCodes}
                 renderItem={({ item }) => (
                     <CountryRow
-                        iso={item.iso}
+                        iso={item.country}
                         code={item.code}
                         setCountryCode={setCountryCode}
                     />
