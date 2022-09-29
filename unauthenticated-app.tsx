@@ -40,8 +40,8 @@ const PhoneNumberSignIn: FC<{
     run: Function
     signInWithPhoneNumber: Function
 }> = ({ run, signInWithPhoneNumber }) => {
-    const [countryCode, setCountryCode] = useState<string>('+1')
-    const [phoneNum, setPhoneNum] = useState<string>('6505553434')
+    const [countryCode, setCountryCode] = useState<string>('+44')
+    const [phoneNum, setPhoneNum] = useState<string>('')
 
     const handleSubmit = () => {
         const fullPhoneNum = countryCode.concat(phoneNum)

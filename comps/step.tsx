@@ -11,71 +11,93 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
     const input5 = useRef<TextInput>(null)
     const input6 = useRef<TextInput>(null)
 
-    const [code, setCode] = useState<string>('')
+    const [code, setCode] = useState<string[]>(['', '', '', '', '', ''])
 
     const onChange = (
         e: NativeSyntheticEvent<TextInputChangeEventData>,
-        input: RefObject<TextInput>
+        input: RefObject<TextInput>,
+        index: number
     ) => {
         if (e.nativeEvent.text.length === 1 && input.current) {
-            setCode((prevState) => prevState + e.nativeEvent.text)
+            let arrCopy = [...code]
+
+            let newElement = e.nativeEvent.text
+
+            arrCopy[index] = newElement
+
+            setCode(arrCopy)
+
             input.current.focus()
         }
     }
 
     const onChangeLastInput = (
-        e: NativeSyntheticEvent<TextInputChangeEventData>
+        e: NativeSyntheticEvent<TextInputChangeEventData>,
+        index: number
     ) => {
         if (e.nativeEvent.text.length === 1) {
-            setCode((prevState) => prevState + e.nativeEvent.text)
+            let arrCopy = [...code]
+
+            let newElement = e.nativeEvent.text
+
+            arrCopy[index] = newElement
+
+            setCode(arrCopy)
         }
     }
 
     useEffect(() => {
-        if (code.length === 6) {
-            run(data?.confirm(code))
+        if (!code.includes('')) {
+            run(data?.confirm(code.join('')))
         }
+        console.log(code.join(''))
     }, [code])
 
     return (
         <Box flexDirection="row" justifyContent="space-between">
             <Input
                 maxLength={1}
-                onChange={(e) => onChange(e, input2)}
+                onChange={(e) => onChange(e, input2, 0)}
                 variant="step"
                 autoFocus={true}
+                keyboardType="numeric"
             />
             <Input
                 ref={input2}
                 maxLength={1}
-                onChange={(e) => onChange(e, input3)}
+                onChange={(e) => onChange(e, input3, 1)}
                 variant="step"
+                keyboardType="numeric"
             />
 
             <Input
                 ref={input3}
                 maxLength={1}
-                onChange={(e) => onChange(e, input4)}
+                onChange={(e) => onChange(e, input4, 2)}
                 variant="step"
+                keyboardType="numeric"
             />
 
             <Input
                 ref={input4}
                 maxLength={1}
-                onChange={(e) => onChange(e, input5)}
+                onChange={(e) => onChange(e, input5, 3)}
                 variant="step"
+                keyboardType="numeric"
             />
             <Input
                 ref={input5}
                 maxLength={1}
-                onChange={(e) => onChange(e, input6)}
+                onChange={(e) => onChange(e, input6, 4)}
                 variant="step"
+                keyboardType="numeric"
             />
             <Input
                 ref={input6}
                 maxLength={1}
-                onChange={(e) => onChangeLastInput(e)}
+                onChange={(e) => onChangeLastInput(e, 5)}
                 variant="step"
+                keyboardType="numeric"
             />
         </Box>
     )
