@@ -97,8 +97,8 @@ const UnAuthenticatedApp = () => {
 
     return (
         <Container>
-            {/* {data?.confirm ? (
-                <Confirmation run={run} data={data} />
+            {data?.confirm ? (
+                <Step run={run} data={data} />
             ) : (
                 <PhoneNumberSignIn
                     run={run}
@@ -106,9 +106,7 @@ const UnAuthenticatedApp = () => {
                 />
             )}
 
-            {isError ? <ErrorMessage error={error} /> : null} */}
-
-            <Step />
+            {isError ? <ErrorMessage error={error} /> : null}
         </Container>
     )
 }

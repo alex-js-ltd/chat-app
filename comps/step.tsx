@@ -4,7 +4,7 @@ import { Input, Box } from './library'
 
 import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 
-const Step: FC = () => {
+const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
     const input2 = useRef<TextInput>(null)
     const input3 = useRef<TextInput>(null)
     const input4 = useRef<TextInput>(null)
@@ -28,6 +28,8 @@ const Step: FC = () => {
     ) => {
         if (e.nativeEvent.text.length === 1) {
             setText((prevState) => prevState + e.nativeEvent.text)
+            const verificationCode = text + e.nativeEvent.text
+            run(data?.confirm(verificationCode))
         }
     }
 
@@ -36,7 +38,7 @@ const Step: FC = () => {
     }, [text])
 
     return (
-        <Box flex={1} flexDirection="row" justifyContent="space-between">
+        <Box flexDirection="row" justifyContent="space-between">
             <Input maxLength={1} onChange={(e) => onChange(e, input2)} />
             <Input
                 ref={input2}
