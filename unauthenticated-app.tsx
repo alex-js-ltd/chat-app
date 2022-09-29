@@ -73,24 +73,6 @@ const PhoneNumberSignIn: FC<{
     )
 }
 
-const Confirmation: FC<{
-    data: any
-    run: Function
-}> = ({ run, data }) => {
-    const [code, setCode] = useState('')
-
-    return (
-        <>
-            <Input value={code} onChangeText={(text) => setCode(text)} />
-            <Button
-                title="Confirm Code"
-                onPress={() => run(data?.confirm(code))}
-                variant="signIn"
-            />
-        </>
-    )
-}
-
 const UnAuthenticatedApp = () => {
     const { data, signInWithPhoneNumber, run, error, isError, reset } =
         useAuth()
