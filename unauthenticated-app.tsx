@@ -8,6 +8,8 @@ import { countryCodes } from './utils/countryCodes'
 import { FlatList } from 'react-native'
 import { CountryRow } from './comps/country-row'
 
+import { Step } from './comps/step'
+
 const CountryCodes: FC<{ code: string; setCountryCode: Function }> = ({
     code,
     setCountryCode,
@@ -95,7 +97,7 @@ const UnAuthenticatedApp = () => {
 
     return (
         <Container>
-            {data?.confirm ? (
+            {/* {data?.confirm ? (
                 <Confirmation run={run} data={data} />
             ) : (
                 <PhoneNumberSignIn
@@ -104,7 +106,9 @@ const UnAuthenticatedApp = () => {
                 />
             )}
 
-            {isError ? <ErrorMessage error={error} /> : null}
+            {isError ? <ErrorMessage error={error} /> : null} */}
+
+            <Step />
         </Container>
     )
 }

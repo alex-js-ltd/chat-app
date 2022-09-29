@@ -97,6 +97,7 @@ export const theme = createTheme({
         phoneNum: {
             flex: 1,
         },
+        step: {},
     },
     textVariants: {
         defaults: {
