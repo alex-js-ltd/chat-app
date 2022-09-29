@@ -74,8 +74,7 @@ const PhoneNumberSignIn: FC<{
 }
 
 const UnAuthenticatedApp = () => {
-    const { data, signInWithPhoneNumber, run, error, isError, reset } =
-        useAuth()
+    const { data, signInWithPhoneNumber, run, error, isError } = useAuth()
 
     return (
         <Container>
@@ -87,8 +86,7 @@ const UnAuthenticatedApp = () => {
                     signInWithPhoneNumber={signInWithPhoneNumber}
                 />
             )}
-
-            {isError ? <ErrorMessage error={error} reset={reset} /> : null}
+            {isError ? <ErrorMessage error={error} /> : null}
         </Container>
     )
 }

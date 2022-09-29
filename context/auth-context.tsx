@@ -20,7 +20,6 @@ const AuthContext = createContext<
           run: Function
           error: Error
           isError: boolean
-          reset: Function
 
           signInWithPhoneNumber: Function
 
@@ -68,6 +67,17 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             .then(() => reset())
     }
 
+    useEffect(() => {
+        if (
+            error?.message ===
+            `[auth/code-expired] The SMS code has expired. Please re-send the verification code to try again.`
+        ) {
+            setTimeout(() => {
+                reset()
+            }, 2000)
+        }
+    }, [error])
+
     const value = {
         user,
 
@@ -75,7 +85,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         run,
         error,
         isError,
-        reset,
 
         // sign in
         signInWithPhoneNumber,

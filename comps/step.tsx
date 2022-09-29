@@ -53,7 +53,6 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
         if (!code.includes('')) {
             run(data?.confirm(code.join('')))
         }
-        console.log(code.join(''))
     }, [code])
 
     return (
