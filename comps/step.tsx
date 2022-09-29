@@ -33,9 +33,10 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
 
     const onChangeLastInput = (
         e: NativeSyntheticEvent<TextInputChangeEventData>,
+        input: RefObject<TextInput>,
         index: number
     ) => {
-        if (e.nativeEvent.text.length === 1) {
+        if (e.nativeEvent.text.length === 1 && input.current) {
             let arrCopy = [...code]
 
             let newElement = e.nativeEvent.text
@@ -43,6 +44,8 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
             arrCopy[index] = newElement
 
             setCode(arrCopy)
+
+            input.current.blur()
         }
     }
 
@@ -95,7 +98,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
             <Input
                 ref={input6}
                 maxLength={1}
-                onChange={(e) => onChangeLastInput(e, 5)}
+                onChange={(e) => onChangeLastInput(e, input6, 5)}
                 variant="step"
                 keyboardType="numeric"
             />

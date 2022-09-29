@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {
     createText,
     createBox,
@@ -17,10 +17,6 @@ import {
 
 const Text = createText<Theme>()
 const Box = createBox<Theme>()
-
-const ErrorMessage: FC<{ error: Error }> = ({ error }) => (
-    <Text variant="error">{error.message}</Text>
-)
 
 const buttonVariant = createVariant({ themeKey: 'buttonVariants' })
 const ButtonContainer = createRestyleComponent<
@@ -58,6 +54,29 @@ const Input = createRestyleComponent<
         React.ComponentProps<typeof TextInput>,
     Theme
 >([inputVariant], TextInput)
+
+const ErrorMessage: FC<{ error: Error; reset: Function }> = ({
+    error,
+    reset,
+}) => {
+    useEffect(() => {
+        if (
+            error?.message ===
+            `[auth/code-expired] The SMS code has expired. Please re-send the verification code to try again.`
+        ) {
+            setTimeout(() => {
+                reset()
+            }, 2000)
+        }
+        console.log(error.message)
+    }, [error])
+
+    return (
+        <Container variant="error">
+            <Text variant="error">{error.message}</Text>
+        </Container>
+    )
+}
 
 export {
     ErrorMessage,

@@ -113,8 +113,6 @@ export const theme = createTheme({
         },
         error: {
             color: 'inputErrorAccentColor',
-            marginTop: 'm',
-            marginBottom: 'm',
         },
     },
     containerVariants: {
@@ -124,7 +122,13 @@ export const theme = createTheme({
             justifyContent: 'center',
         },
 
-        countryRow: {},
+        error: {
+            position: 'absolute',
+            bottom: 24,
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+        },
     },
     safeAreaVariants: {
         defaults: {

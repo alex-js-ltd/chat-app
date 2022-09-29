@@ -88,7 +88,7 @@ const UnAuthenticatedApp = () => {
                 />
             )}
 
-            {isError ? <ErrorMessage error={error} /> : null}
+            {isError ? <ErrorMessage error={error} reset={reset} /> : null}
         </Container>
     )
 }
