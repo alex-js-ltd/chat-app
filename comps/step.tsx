@@ -17,12 +17,23 @@ const Step: FC = () => {
         e: NativeSyntheticEvent<TextInputChangeEventData>,
         input: RefObject<TextInput>
     ) => {
-        console.log(e.nativeEvent)
-
         if (e.nativeEvent.text.length === 1 && input.current) {
+            setText((prevState) => prevState + e.nativeEvent.text)
             input.current.focus()
         }
     }
+
+    const onChangeLastInput = (
+        e: NativeSyntheticEvent<TextInputChangeEventData>
+    ) => {
+        if (e.nativeEvent.text.length === 1) {
+            setText((prevState) => prevState + e.nativeEvent.text)
+        }
+    }
+
+    useEffect(() => {
+        console.log(text)
+    }, [text])
 
     return (
         <Box flex={1} flexDirection="row" justifyContent="space-between">
@@ -49,7 +60,11 @@ const Step: FC = () => {
                 maxLength={1}
                 onChange={(e) => onChange(e, input6)}
             />
-            <Input ref={input6} maxLength={1} />
+            <Input
+                ref={input6}
+                maxLength={1}
+                onChange={(e) => onChangeLastInput(e)}
+            />
         </Box>
     )
 }
