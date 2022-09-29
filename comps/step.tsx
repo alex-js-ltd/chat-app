@@ -43,6 +43,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 maxLength={1}
                 onChange={(e) => onChange(e, input2)}
                 variant="step"
+                autoFocus={true}
             />
             <Input
                 ref={input2}

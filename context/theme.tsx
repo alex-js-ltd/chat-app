@@ -51,7 +51,6 @@ export const theme = createTheme({
         },
         modalOpenButton: {
             color: 'inputTextColor',
-
             paddingHorizontal: 'm',
             backgroundColor: 'inputBackgroundAlt',
             borderRadius: 4,

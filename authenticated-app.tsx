@@ -1,13 +1,19 @@
 import React, { FC } from 'react'
 import { useAuth } from './context/auth-context'
-import { Container, Button } from './comps/library'
+import { Container, Button, Text } from './comps/library'
 
 const AuthenticatedApp: FC = () => {
     const { logout } = useAuth()
 
     return (
         <Container>
-            <Button title="log out" onPress={() => logout()} variant="signIn" />
+            <Text>Welcome to the epic chat app!</Text>
+            <Button
+                marginTop="auto"
+                title="log out"
+                onPress={() => logout()}
+                variant="signIn"
+            />
         </Container>
     )
 }

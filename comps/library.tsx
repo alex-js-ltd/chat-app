@@ -32,9 +32,9 @@ const ButtonContainer = createRestyleComponent<
 const Button: FC<{
     onPress?: (event: GestureResponderEvent) => void
     title: string
-    variant: any
-}> = ({ onPress, title, variant }) => (
-    <ButtonContainer variant={variant} onPress={onPress}>
+    [rest: string]: any
+}> = ({ onPress, title, ...rest }) => (
+    <ButtonContainer onPress={onPress} {...rest}>
         <Text variant="button">{title}</Text>
     </ButtonContainer>
 )
