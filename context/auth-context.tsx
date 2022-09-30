@@ -7,8 +7,8 @@ import React, {
 } from 'react'
 
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth'
-
 import { useAsync } from '../utils/useAsync'
+import { errors } from '../utils/errors'
 
 type User = FirebaseAuthTypes.User | null
 type AuthProviderProps = { children: ReactNode }
@@ -21,13 +21,12 @@ const AuthContext = createContext<
           error: Error
           isError: boolean
           reset: Function
-
           signInWithPhoneNumber: Function
-
           logout: Function
       }
     | undefined
 >(undefined)
+
 AuthContext.displayName = 'AuthContext'
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
@@ -67,6 +66,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
             .signOut()
             .then(() => reset())
     }
+
+    useEffect(() => {
+        if (error?.message === errors[0]) {
+            reset()
+        }
+    }, [error])
 
     const value = {
         user,
