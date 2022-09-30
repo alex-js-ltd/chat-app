@@ -1,10 +1,13 @@
 import React, { useState, FC, useEffect, useRef, RefObject } from 'react'
+import { useAuth } from '../context/auth-context'
 import { TextInput } from 'react-native'
 import { Input, Box } from './library'
 
 import { NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
 
-const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
+const Step: FC = () => {
+    const { data, run, error, reset } = useAuth()
+
     const input2 = useRef<TextInput>(null)
     const input3 = useRef<TextInput>(null)
     const input4 = useRef<TextInput>(null)
@@ -55,6 +58,21 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
         }
     }, [code])
 
+    useEffect(() => {
+        if (
+            error?.message ===
+            `[auth/code-expired] The SMS code has expired. Please re-send the verification code to try again.`
+        ) {
+            setTimeout(() => {
+                reset()
+            }, 2000)
+        }
+    }, [error])
+
+    useEffect(() => {
+        console.log('test', input2.current?.clear)
+    }, [input2.current])
+
     return (
         <Box flexDirection="row" justifyContent="space-between">
             <Input
@@ -63,6 +81,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 variant="step"
                 autoFocus={true}
                 keyboardType="numeric"
+                clearTextOnFocus={true}
             />
             <Input
                 ref={input2}
@@ -70,6 +89,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 onChange={(e) => onChange(e, input3, 1)}
                 variant="step"
                 keyboardType="numeric"
+                clearTextOnFocus={true}
             />
 
             <Input
@@ -78,6 +98,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 onChange={(e) => onChange(e, input4, 2)}
                 variant="step"
                 keyboardType="numeric"
+                clearTextOnFocus={true}
             />
 
             <Input
@@ -86,6 +107,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 onChange={(e) => onChange(e, input5, 3)}
                 variant="step"
                 keyboardType="numeric"
+                clearTextOnFocus={true}
             />
             <Input
                 ref={input5}
@@ -93,6 +115,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 onChange={(e) => onChange(e, input6, 4)}
                 variant="step"
                 keyboardType="numeric"
+                clearTextOnFocus={true}
             />
             <Input
                 ref={input6}
@@ -100,6 +123,7 @@ const Step: FC<{ data: any; run: Function }> = ({ data, run }) => {
                 onChange={(e) => onChangeLastInput(e, input6, 5)}
                 variant="step"
                 keyboardType="numeric"
+                clearTextOnFocus={true}
             />
         </Box>
     )

@@ -36,10 +36,9 @@ const CountryCodes: FC<{ code: string; setCountryCode: Function }> = ({
     </ModalProvider>
 )
 
-const PhoneNumberSignIn: FC<{
-    run: Function
-    signInWithPhoneNumber: Function
-}> = ({ run, signInWithPhoneNumber }) => {
+const PhoneNumberSignIn: FC = () => {
+    const { signInWithPhoneNumber, run } = useAuth()
+
     const [countryCode, setCountryCode] = useState<string>('+44')
     const [phoneNum, setPhoneNum] = useState<string>('')
 
@@ -74,18 +73,11 @@ const PhoneNumberSignIn: FC<{
 }
 
 const UnAuthenticatedApp = () => {
-    const { data, signInWithPhoneNumber, run, error, isError } = useAuth()
+    const { data, error, isError } = useAuth()
 
     return (
         <Container>
-            {data?.confirm ? (
-                <Step run={run} data={data} />
-            ) : (
-                <PhoneNumberSignIn
-                    run={run}
-                    signInWithPhoneNumber={signInWithPhoneNumber}
-                />
-            )}
+            {data?.confirm ? <Step /> : <PhoneNumberSignIn />}
             {isError ? <ErrorMessage error={error} /> : null}
         </Container>
     )

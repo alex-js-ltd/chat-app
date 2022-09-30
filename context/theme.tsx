@@ -67,7 +67,6 @@ export const theme = createTheme({
             marginRight: 'auto',
             marginLeft: 'auto',
         },
-
         countryRow: {
             flexDirection: 'row',
             borderBottomWidth: 1,
@@ -78,7 +77,6 @@ export const theme = createTheme({
             height: 88,
         },
     },
-
     inputVariants: {
         defaults: {
             color: 'inputTextColor',
@@ -113,6 +111,7 @@ export const theme = createTheme({
         },
         error: {
             color: 'inputErrorAccentColor',
+            textAlign: 'left',
         },
     },
     containerVariants: {
@@ -121,10 +120,10 @@ export const theme = createTheme({
             flex: 1,
             justifyContent: 'center',
         },
-
         error: {
             position: 'absolute',
             bottom: 24,
+
             flex: 1,
             flexDirection: 'row',
             justifyContent: 'flex-start',
